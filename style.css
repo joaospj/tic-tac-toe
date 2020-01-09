@@ -16,6 +16,7 @@ td {
   background-color: #eeeeee;
   border: black 5px solid;
   font-size: 5em;
+  cursor: pointer;
 }
 
 td:hover {

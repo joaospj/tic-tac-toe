@@ -1,0 +1,23 @@
+body {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+  margin: auto;
+}
+
+td {
+  width: 100px;
+  height: 100px;
+  background-color: #eeeeee;
+  border: black 5px solid;
+  font-size: 5em;
+}
+
+td:hover {
+  background-color: #999999;
+}

@@ -10,9 +10,12 @@ const player = {
 };
 
 let currentPlayer = player.x;
+let countPlay = 0;
 let turn = document.getElementById("turn");
 turn.innerHTML = `Turn to play = ${currentPlayer}`;
 let square = document.querySelectorAll("td");
+
+//Change the next player or check the winner for display
 
 const changePlayers = () => {
   let prevPlayer;
@@ -25,10 +28,14 @@ const changePlayers = () => {
   }
   if (checkWinner()) {
     turn.innerHTML = `The winner is ${prevPlayer}`;
-  } else {
+  } else if (countPlay < 9) {
     turn.innerHTML = `Turn to play = ${currentPlayer}`;
+  } else {
+    turn.innerHTML = `The game is tie`;
   }
 };
+
+// Check if there is a winner from a row
 
 const equalRow = row => {
   return (
@@ -38,6 +45,8 @@ const equalRow = row => {
   );
 };
 
+// Check if there is a winner from a column
+
 const equalCol = col => {
   return (
     board[0][col] &&
@@ -45,6 +54,8 @@ const equalCol = col => {
     board[1][col] === board[2][col]
   );
 };
+
+// Check if there is a winner from the diagonals
 
 const equalDiagonal1 = () => {
   return (
@@ -57,6 +68,9 @@ const equalDiagonal2 = () => {
     board[0][2] && board[0][2] === board[1][1] && board[1][1] === board[2][0]
   );
 };
+
+// Check if the game has a winner calling the functions above
+// for each row, column and diagonal
 
 const checkWinner = () => {
   if (
@@ -75,13 +89,18 @@ const checkWinner = () => {
   }
 };
 
+// Check if the square clicked is null to make a play
+// and if there is a winner, no more square is filled
+
 const makePlay = evt => {
   const idx = evt.target.getAttribute("data-id").split(",");
   const row = idx[0];
   const col = idx[1];
+
   if (board[row][col] === null && !checkWinner()) {
     board[row][col] = currentPlayer;
     evt.target.innerHTML = board[row][col];
+    countPlay++;
     changePlayers();
   }
 };

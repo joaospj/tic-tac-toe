@@ -10,14 +10,23 @@ const player = {
 };
 
 let currentPlayer = player.x;
-
+let turn = document.getElementById("turn");
+turn.innerHTML = `Turn to play = ${currentPlayer}`;
 let square = document.querySelectorAll("td");
 
 const changePlayers = () => {
+  let prevPlayer;
   if (currentPlayer === player.x) {
+    prevPlayer = player.x;
     currentPlayer = player.o;
   } else {
+    prevPlayer = player.o;
     currentPlayer = player.x;
+  }
+  if (checkWinner()) {
+    turn.innerHTML = `The winner is ${prevPlayer}`;
+  } else {
+    turn.innerHTML = `Turn to play = ${currentPlayer}`;
   }
 };
 

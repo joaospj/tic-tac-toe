@@ -12,8 +12,26 @@ const player = {
 let currentPlayer = player.x;
 let countPlay = 0;
 let turn = document.getElementById("turn");
-turn.innerHTML = `Turn to play = ${currentPlayer}`;
+let playAgain = document.getElementById("play-again");
 let square = document.querySelectorAll("td");
+
+turn.innerHTML = `Turn to play = ${currentPlayer}`;
+
+// Reset the game to play again
+
+const resetGame = () => {
+  board = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null]
+  ];
+  square.forEach(sq => (sq.innerHTML = ""));
+  turn.innerHTML = `Turn to play = ${currentPlayer}`;
+  countPlay = 0;
+  playAgain.className = "gone";
+};
+
+playAgain.addEventListener("click", resetGame);
 
 //Change the next player or check the winner for display
 
@@ -28,10 +46,12 @@ const changePlayers = () => {
   }
   if (checkWinner()) {
     turn.innerHTML = `The winner is ${prevPlayer}`;
+    playAgain.className = "";
   } else if (countPlay < 9) {
     turn.innerHTML = `Turn to play = ${currentPlayer}`;
   } else {
     turn.innerHTML = `The game is tie`;
+    playAgain.className = "";
   }
 };
 
